@@ -8,7 +8,11 @@
 	</head>
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<body>
+		${loginMember.memberName}님 안녕하세요. <a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
+		
 		<h1>BOARD LIST</h1>
+		<!-- 게시글 입력 -->
+		<a href="${pageContext.request.contextPath}/RegisterBoardFormController">글쓰기</a>
 		<!-- 게시글 출력 개수 설정 -->
 		<form id="pageForm" action="${pageContext.request.contextPath}/BoardListController" method="get">
 			<select name="rowPerPage" id="rowPerPage">
@@ -42,7 +46,7 @@
 				<c:forEach var="board" items="${boardList}">
 					<tr>
 						<td>${board.boardNo}</td>
-						<td><a href="">${board.boardTitle}</a></td>
+						<td><a href="${pageContext.request.contextPath}/getBoardOneController?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
 						<td>${board.createdate}</td>
 					</tr>
 				</c:forEach>
