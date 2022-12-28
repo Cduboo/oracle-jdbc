@@ -37,14 +37,22 @@ public class GetBoardListController extends HttpServlet {
 			rowPerPage = Integer.parseInt(request.getParameter("rowPerPage"));
 		}
 		
+		String search = "";
+		if(request.getParameter("search") != null) {
+			search = request.getParameter("search");
+		}
+		
 		// service - list
 		this.boardServiece = new BoardService();
-		ArrayList<Board> list = boardServiece.getBoardListByPage(currentPage, rowPerPage);
+		ArrayList<Board> list = boardServiece.getBoardListByPage(currentPage, rowPerPage, search);
+		int boardCount = boardServiece.getBoardCount(search);
 		
 		// 객체 바인딩 
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
+		request.setAttribute("boardCount", boardCount);
+		request.setAttribute("search", search);
 		
 		// forward
 		request.getRequestDispatcher("/WEB-INF/view/board/boardList.jsp").forward(request, response);

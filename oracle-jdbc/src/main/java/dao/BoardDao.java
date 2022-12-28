@@ -9,16 +9,17 @@ import vo.Board;
 
 public class BoardDao {
 	// 리스트(페이징,검색)
-	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow) throws Exception {
+	public ArrayList<Board> selectBoardListByPage(Connection conn, int beginRow, int endRow, String search) throws Exception {
 		ArrayList<Board> list = new ArrayList<>();
 		String sql = "SELECT board_no boardNo, board_title boardTitle, createdate"
 				+ " FROM (SELECT rownum rnum, board_no, board_title, createdate"
 				+ "			FROM (SELECT board_no, board_title, createdate"
-				+ "					FROM board ORDER BY board_no DESC))"
-				+ " WHERE rnum BETWEEN ? AND ?"; // WHERE rnum >=? AND rnum <=?;
+				+ "					FROM board ORDER BY TO_NUMBER(board_no) DESC))"
+				+ " WHERE rnum BETWEEN ? AND ? AND board_title LIKE ?"; // WHERE rnum >=? AND rnum <=?;
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, endRow);
+		stmt.setString(3, "%" + search + "%");
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
@@ -33,6 +34,21 @@ public class BoardDao {
 		stmt.close();
 		
 		return list;
+	}
+	
+	// 전체 게시글 개수
+	public int selectBoardCount(Connection conn, String search) throws Exception {
+		String sql = "SELECT COUNT(*) count FROM board WHERE board_title LIKE ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, "%" + search + "%");
+		ResultSet rs = stmt.executeQuery();
+		
+		int boardCount = 0;
+		if(rs.next()) {
+			boardCount = rs.getInt("count");
+		}
+		
+		return boardCount;
 	}
 	
 	// 게시글 상세 정보

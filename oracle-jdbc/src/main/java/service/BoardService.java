@@ -12,7 +12,7 @@ public class BoardService {
 	private BoardDao boardDao;
 	
 	// 게시판 리스트
-	public ArrayList<Board> getBoardListByPage(int currentPage, int rowPerPage) {
+	public ArrayList<Board> getBoardListByPage(int currentPage, int rowPerPage, String search) {
 		ArrayList<Board> list = null;
 		Connection conn = null;
 		
@@ -22,7 +22,7 @@ public class BoardService {
 			int endRow = beginRow + rowPerPage - 1;
 	
 			boardDao = new BoardDao();
-			list = boardDao.selectBoardListByPage(conn, beginRow, endRow);
+			list = boardDao.selectBoardListByPage(conn, beginRow, endRow, search);
 			
 			// DBUtil -> 오토커밋 false 설정
 			conn.commit();
@@ -42,6 +42,35 @@ public class BoardService {
 		}
 		
 		return list;
+	}
+	
+	// 전체 게시글 개수
+	public int getBoardCount(String search) {
+		int boardCount = 0;
+		Connection conn = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			boardDao = new BoardDao();
+			boardCount = boardDao.selectBoardCount(conn, search);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return boardCount;
 	}
 	
 	// 게시글 상세 정보
