@@ -14,8 +14,9 @@
 		제목 : ${boardOne.boardTitle}
 		내용 : ${boardOne.boardContent}
 		작성일 : ${boardOne.createdate}
-		
-		<a href="${pageContext.request.contextPath}/board/updateBoard?boardNo=${boardOne.boardNo}">수정</a>
-		<a href="${pageContext.request.contextPath}/board/deleteBoard?boardNo=${boardOne.boardNo}">삭제</a>
+		<c:if test="${boardOne.memberId == loginMember.memberId}">
+			<a href="${pageContext.request.contextPath}/board/updateBoard?boardNo=${boardOne.boardNo}">수정</a>
+			<a href="${pageContext.request.contextPath}/board/deleteBoard?boardNo=${boardOne.boardNo}">삭제</a>
+		</c:if>
 	</body>
 </html>

@@ -69,7 +69,7 @@ public class MemberService {
 	}
 	
 	// 회원 상세 정보
-	public Member selectMemberOne(int memberId) {
+	public Member selectMemberOne(String memberId) {
 		Member member = null;
 		Connection conn = null;
 		
@@ -106,6 +106,35 @@ public class MemberService {
 			this.memberDao = new MemberDao();
 			conn = DBUtil.getConnection();
 			row = memberDao.updateMember(conn, member);
+			
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
+	// 회원 비밀번호 수정
+	public int updateMemberPw(String memberId, String memberPw, String newMemberPw) {
+		int row = 0;
+		Connection conn = null;
+		
+		try {
+			this.memberDao = new MemberDao();
+			conn = DBUtil.getConnection();
+			row = memberDao.updateMemberPw(conn, memberId, memberPw, newMemberPw);
 			
 			conn.commit();
 		} catch (Exception e) {

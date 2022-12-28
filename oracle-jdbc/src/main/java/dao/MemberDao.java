@@ -40,10 +40,10 @@ public class MemberDao {
 	}
 	
 	// 회원 상세정보
-	public Member selectMemberOne(Connection conn, int memberId) throws Exception {
+	public Member selectMemberOne(Connection conn, String memberId) throws Exception {
 		String sql = "SELECT member_id memberId, member_name memberName, createdate FROM member WHERE member_id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, memberId);
+		stmt.setString(1, memberId);
 		ResultSet rs = stmt.executeQuery();
 		
 		Member member = null;
@@ -66,6 +66,20 @@ public class MemberDao {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, member.getMemberName());
 		stmt.setString(2, member.getMemberId());
+		int row = stmt.executeUpdate();
+		
+		stmt.close();
+		
+		return row;
+	}
+	
+	// 회원 비밀번호 수정
+	public int updateMemberPw(Connection conn, String memberId, String memberPw, String newMemberPw) throws Exception {
+		String sql = "UPDATE member SET member_pw = ? WHERE member_id = ? AND  member_pw = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, newMemberPw);
+		stmt.setString(2, memberId);
+		stmt.setString(3, memberPw);
 		int row = stmt.executeUpdate();
 		
 		stmt.close();

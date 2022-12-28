@@ -13,6 +13,7 @@
 		이름 : ${loginMember.memberName}
 		
 		<a href="${pageContext.request.contextPath}/member/updateMember">내정보 수정</a>
+		<a href="${pageContext.request.contextPath}/member/updateMemberPw">비밀번호 변경</a>
 		<a href="${pageContext.request.contextPath}/member/deleteMember">회원탈퇴</a>
 	</body>
 </html>
