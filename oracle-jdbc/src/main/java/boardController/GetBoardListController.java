@@ -14,8 +14,8 @@ import service.BoardService;
 import vo.Board;
 import vo.Member;
 
-@WebServlet("/BoardListController")
-public class BoardListController extends HttpServlet {
+@WebServlet("/board/boardList")
+public class GetBoardListController extends HttpServlet {
 	private BoardService boardServiece;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class BoardListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) { // 비로그인 상태
-			response.sendRedirect(request.getContextPath() + "/LoginFormController");
+			response.sendRedirect(request.getContextPath() + "/member/login");
 			return;
 		}
 		
@@ -40,13 +40,14 @@ public class BoardListController extends HttpServlet {
 		// service - list
 		this.boardServiece = new BoardService();
 		ArrayList<Board> list = boardServiece.getBoardListByPage(currentPage, rowPerPage);
+		
 		// 객체 바인딩 
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("rowPerPage", rowPerPage);
 		
 		// forward
-		request.getRequestDispatcher("WEB-INF/view/board/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/board/boardList.jsp").forward(request, response);
 	}
 
 }

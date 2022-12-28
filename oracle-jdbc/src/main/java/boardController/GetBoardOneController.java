@@ -14,8 +14,8 @@ import service.BoardService;
 import vo.Board;
 import vo.Member;
 
-@WebServlet("/ModifyBoardFormController")
-public class ModifyBoardFormController extends HttpServlet {
+@WebServlet("/board/boardOne")
+public class GetBoardOneController extends HttpServlet {
 	private BoardService boardService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,19 +23,23 @@ public class ModifyBoardFormController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember == null) { // 비로그인 상태
-			response.sendRedirect(request.getContextPath() + "/LoginFormController");
+			response.sendRedirect(request.getContextPath() + "/member/login");
 			return;
 		}
 		
 		// 파라미터 수집
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
 		// service
-		boardService = new BoardService();
+		this.boardService = new BoardService();
 		Board boardOne = boardService.getBoardOne(boardNo);
+		
+		// view 메뉴구성
+		// 수정/ 삭제 조건 -> 로그인멤버 == 글쓴멤버 
 		
 		// 객체 바인딩 -> forward
 		request.setAttribute("boardOne", boardOne);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/board/updateBoardForm.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/board/boardOne.jsp");
 		rd.forward(request, response);
 	}
 

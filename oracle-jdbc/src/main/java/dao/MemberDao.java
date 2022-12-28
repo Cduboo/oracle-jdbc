@@ -33,9 +33,57 @@ public class MemberDao {
 			resultMember.setMemberName(rs.getString("memberName"));
 		}
 		
-		stmt.close();
 		rs.close();
+		stmt.close();
 		
 		return resultMember;
 	}
+	
+	// 회원 상세정보
+	public Member selectMemberOne(Connection conn, int memberId) throws Exception {
+		String sql = "SELECT member_id memberId, member_name memberName, createdate FROM member WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, memberId);
+		ResultSet rs = stmt.executeQuery();
+		
+		Member member = null;
+		if(rs.next()) {
+			member = new Member();
+			member.setMemberId("memberId");
+			member.setMemberName("memberName");
+			member.setCreateadate("createdate");
+		}
+		
+		rs.close();
+		stmt.close();
+		
+		return member;
+	}
+	
+	// 회원 정보 수정
+	public int updateMember(Connection conn, Member member) throws Exception {
+		String sql = "UPDATE member SET member_name = ? WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberName());
+		stmt.setString(2, member.getMemberId());
+		int row = stmt.executeUpdate();
+		
+		stmt.close();
+		
+		return row;
+	}
+	
+	// 회원 탈퇴
+	public int deleteMember(Connection conn, Member member) throws Exception {
+		String sql = "DELETE FROM member WHERE member_id = ? AND member_pw = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberId());
+		stmt.setString(2, member.getMemberPw());
+		int row = stmt.executeUpdate();
+		
+		stmt.close();
+		
+		return row;
+	}
+	
 }

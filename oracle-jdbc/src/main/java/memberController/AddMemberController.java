@@ -11,19 +11,30 @@ import javax.servlet.http.HttpSession;
 import service.MemberService;
 import vo.Member;
 
-/**
- * Servlet implementation class RegisterMemberActionController
- */
-@WebServlet("/RegisterMemberActionController")
-public class RegisterMemberActionController extends HttpServlet {
+@WebServlet("/member/insertMember")
+public class AddMemberController extends HttpServlet {
 	private MemberService memberService;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인 상태 -> 접근불가, 게시판 페이지로 이동
+	// 회원가입 폼
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 상태 -> 접근불가
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/home");
+			return;
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/view/member/insertMemberForm.jsp").forward(request, response);
+	}
+	
+	// 회원가입 액션
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 상태 -> 접근불가
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember != null) {
+			response.sendRedirect(request.getContextPath() + "/home");
 			return;
 		}
 		
@@ -40,16 +51,17 @@ public class RegisterMemberActionController extends HttpServlet {
 		member.setMemberPw(memberPw);
 		
 		// service
-		memberService = new MemberService();
+		this.memberService = new MemberService();
 		int row = memberService.addMember(member);
+		
+		// redirect
 		if(row == 1) {
 			System.out.println("회원가입 성공");
+			response.sendRedirect(request.getContextPath()+"/member/login");
 		} else {
 			System.out.println("회원가입 실패");
+			response.sendRedirect(request.getContextPath()+"/member/insertMember");
 		}
-		
-		// 페이지 전환 -> 로그인
-		response.sendRedirect(request.getContextPath()+"/LoginFormController");
 	}
 
 }

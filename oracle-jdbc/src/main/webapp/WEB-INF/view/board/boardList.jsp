@@ -8,13 +8,12 @@
 	</head>
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<body>
-		${loginMember.memberName}님 안녕하세요. <a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
-		
+		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
 		<h1>BOARD LIST</h1>
 		<!-- 게시글 입력 -->
-		<a href="${pageContext.request.contextPath}/RegisterBoardFormController">글쓰기</a>
+		<a href="${pageContext.request.contextPath}/board/insertBoard">글쓰기</a>
 		<!-- 게시글 출력 개수 설정 -->
-		<form id="pageForm" action="${pageContext.request.contextPath}/BoardListController" method="get">
+		<form id="pageForm" action="${pageContext.request.contextPath}/board/boardList" method="get">
 			<select name="rowPerPage" id="rowPerPage">
 				<c:if test="${rowPerPage == 10}">
 					<option value="10" selected="selected">10</option>				
@@ -46,7 +45,7 @@
 				<c:forEach var="board" items="${boardList}">
 					<tr>
 						<td>${board.boardNo}</td>
-						<td><a href="${pageContext.request.contextPath}/getBoardOneController?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
+						<td><a href="${pageContext.request.contextPath}/board/boardOne?boardNo=${board.boardNo}">${board.boardTitle}</a></td>
 						<td>${board.createdate}</td>
 					</tr>
 				</c:forEach>
@@ -54,8 +53,8 @@
 		</table>
 		<!-- 페이징 -->
 		<div>
-			<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-			<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+			<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+			<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 		</div>
 		
 		<script>

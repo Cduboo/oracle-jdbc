@@ -20,6 +20,7 @@ public class BoardDao {
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, endRow);
 		ResultSet rs = stmt.executeQuery();
+		
 		while(rs.next()) {
 			Board b = new Board();
 			b.setBoardNo(rs.getInt("boardNo"));

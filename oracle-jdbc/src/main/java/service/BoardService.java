@@ -46,17 +46,13 @@ public class BoardService {
 	
 	// 게시글 상세 정보
 	public Board getBoardOne(int boardNo) {
-		Board board = new Board();
+		Board board = null;
 		Connection conn = null;
 		
 		try {
 			conn = DBUtil.getConnection();
 			boardDao = new BoardDao();
 			board = boardDao.selectBoardOne(conn, boardNo);
-			
-			if(board == null) {
-				throw new Exception();
-			}
 			
 			conn.commit();
 		} catch (Exception e) {
@@ -87,10 +83,6 @@ public class BoardService {
 			boardDao = new BoardDao();
 			row = boardDao.insertBoard(conn, board);
 			
-			if(row == 0) {
-				throw new Exception();
-			}
-			
 			conn.commit();
 		} catch (Exception e) {
 			try {
@@ -120,10 +112,6 @@ public class BoardService {
 			boardDao = new BoardDao();
 			row = boardDao.updateBoard(conn, board);
 			
-			if(row == 0) {
-				throw new Exception();
-			}
-			
 			conn.commit();
 		} catch (Exception e) {
 			try {
@@ -152,10 +140,6 @@ public class BoardService {
 			conn = DBUtil.getConnection();
 			boardDao = new BoardDao();
 			row = boardDao.deleteBoard(conn, boardNo);
-			
-			if(row == 0) {
-				throw new Exception();
-			}
 			
 			conn.commit();
 		} catch (Exception e) {

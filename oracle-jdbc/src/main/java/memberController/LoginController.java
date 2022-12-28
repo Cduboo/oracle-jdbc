@@ -7,24 +7,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import service.MemberService;
 import vo.Member;
 
-/**
- * Servlet implementation class LoginActionController
- */
-@WebServlet("/LoginActionController")
-public class LoginActionController extends HttpServlet {
+
+@WebServlet("/member/login")
+public class LoginController extends HttpServlet {
 	private MemberService memberService;
 	
+	// 로그인 폼
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
+	}
+	
+	// 로그인 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인 상태 -> 접근불가, 게시판 페이지로 이동
+		// 로그인 상태 -> 접근불가
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		if(loginMember != null) {
-			response.sendRedirect(request.getContextPath() + "/BoardListController");
+			response.sendRedirect(request.getContextPath() + "/home");
 			return;
 		}
 		
@@ -43,13 +46,13 @@ public class LoginActionController extends HttpServlet {
 		
 		// 로그인 실패 -> 로그인 페이지로 이동
 		if(resultMember == null) {
-			response.sendRedirect(request.getContextPath() + "/LoginFormController");
+			response.sendRedirect(request.getContextPath() + "/member/login");
 			return;
 		}
 		
 		// 로그인 성공
 		session.setAttribute("loginMember", resultMember);
-		response.sendRedirect(request.getContextPath() + "/BoardListController");
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 }
