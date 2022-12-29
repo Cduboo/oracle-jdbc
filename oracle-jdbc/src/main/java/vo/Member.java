@@ -5,19 +5,19 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String updatedate;
-	private String createadate;
+	private String createdate;
 	
 	public Member() {
 		super();
 	}
 	
-	public Member(String memberId, String memberPw, String memberName, String updatedate, String createadate) {
+	public Member(String memberId, String memberPw, String memberName, String updatedate, String createdate) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
 		this.memberName = memberName;
 		this.updatedate = updatedate;
-		this.createadate = createadate;
+		this.createdate = createdate;
 	}
 	
 	public String getMemberId() {
@@ -44,10 +44,10 @@ public class Member {
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
-	public String getCreateadate() {
-		return createadate;
+	public String getCreatedate() {
+		return createdate;
 	}
-	public void setCreateadate(String createadate) {
-		this.createadate = createadate;
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
 	}
 }

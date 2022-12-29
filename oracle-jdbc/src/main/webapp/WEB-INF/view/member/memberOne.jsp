@@ -26,18 +26,18 @@
 											<h4 class="card-title">MYPAGE</h4>
 											<div class="table-responsive pt-3">
 												<table class="table table-bordered">
-													<thead>
-														<tr>
-															<th class="table-active">ID</th>
-															<td>${loginMember.memberId}</td>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<th class="table-active">NAME</th>
-															<td colspan="5">${loginMember.memberName}</td>
-														</tr>
-													</tbody>
+													<tr>
+														<th class="table-active">ID</th>
+														<td>${memberOne.memberId}</td>
+													</tr>
+													<tr>
+														<th class="table-active">NAME</th>
+														<td colspan="5">${memberOne.memberName}</td>
+													</tr>
+													<tr>
+														<th class="table-active">SUBSCRIPTION</th>
+														<td colspan="5">${memberOne.createdate}</td>
+													</tr>
 												</table>
 											</div>
 										</div>

@@ -49,9 +49,9 @@ public class MemberDao {
 		Member member = null;
 		if(rs.next()) {
 			member = new Member();
-			member.setMemberId("memberId");
-			member.setMemberName("memberName");
-			member.setCreateadate("createdate");
+			member.setMemberId(rs.getString("memberId"));
+			member.setMemberName(rs.getString("memberName"));
+			member.setCreatedate(rs.getString("createdate"));
 		}
 		
 		rs.close();
