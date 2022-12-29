@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
@@ -25,7 +27,7 @@
 										<h4 class="card-title">MODIFY BOARD</h4>
 										<!-- 게시글 수정 -->
 										<div class="table-responsive pt-3">
-											<form action="${pageContext.request.contextPath}/board/updateBoard" method="post">
+											<form id="submitForm" action="${pageContext.request.contextPath}/board/updateBoard" method="post">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
@@ -40,20 +42,20 @@
 													<tbody>
 														<tr>
 															<th class="table-active">title</th>
-															<td class="p-2" colspan="5"><input class="form-control" type="text" value="${boardOne.boardTitle}" name="boardTitle"/></td>
+															<td class="p-2" colspan="5"><input class="form-control" type="text" id="boardTitle" value="${boardOne.boardTitle}" name="boardTitle"/></td>
 														</tr>
 														<tr>
 															<th class="table-active" colspan="6">content</th>
 														</tr>
 														<tr>
 															<td class="p-2" colspan="6">
-																<textarea class="form-control" rows="5" cols="20" name="boardContent">${boardOne.boardContent}</textarea>
+																<textarea class="form-control" rows="5" cols="20" id="boardContent" name="boardContent">${boardOne.boardContent}</textarea>
 															</td>
 														</tr>
 													</tbody>
 												</table>
 												<div class="d-flex justify-content-end mt-3">
-													<button class="btn btn-sm btn-primary" type="submit">update</button>
+													<button class="btn btn-sm btn-primary" type="button" id="submitBtn">update</button>
 												</div>
 											</form>
 										</div>

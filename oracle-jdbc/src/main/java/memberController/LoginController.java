@@ -18,6 +18,14 @@ public class LoginController extends HttpServlet {
 	
 	// 로그인 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 상태 -> 접근불가
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember != null) {
+			response.sendRedirect(request.getContextPath() + "/home");
+			return;
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
 	}
 	
@@ -46,7 +54,9 @@ public class LoginController extends HttpServlet {
 		
 		// 로그인 실패 -> 로그인 페이지로 이동
 		if(resultMember == null) {
-			response.sendRedirect(request.getContextPath() + "/member/login");
+			request.setAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.");
+			request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
+			//response.sendRedirect(request.getContextPath() + "/member/login");
 			return;
 		}
 		

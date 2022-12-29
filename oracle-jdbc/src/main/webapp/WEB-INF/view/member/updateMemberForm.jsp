@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
@@ -24,7 +26,7 @@
 									<div class="card">
 										<div class="card-body">
 											<h4 class="card-title">EDIT MY INFOMATION</h4>
-											<form action="${pageContext.request.contextPath}/member/updateMember" method="post">
+											<form id="submitForm" action="${pageContext.request.contextPath}/member/updateMember" method="post">
 												<div class="form-group row">
 													<label for="id" class="col-sm-3 col-form-label">ID</label>
 													<div class="col-sm-9">
@@ -34,11 +36,11 @@
 												<div class="form-group row">
 													<label for="id" class="col-sm-3 col-form-label">NAME</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control" value="${loginMember.memberName}" name="memberName">
+														<input type="text" class="form-control" id="memberName" value="${loginMember.memberName}" name="memberName">
 													</div>
 												</div>
 												<div class="d-flex justify-content-end mt-3">
-													<button type="submit" class="btn btn-primary mr-2">edit</button>
+													<button type="button" class="btn btn-primary mr-2" id="submitBtn">edit</button>
 												</div>
 											</form>
 										</div>

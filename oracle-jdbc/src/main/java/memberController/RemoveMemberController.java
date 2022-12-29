@@ -27,7 +27,7 @@ public class RemoveMemberController extends HttpServlet {
 		}
 		
 		// forward
-		request.getRequestDispatcher("/WEB-INF/view/member/deleteMember.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/member/deleteMemberForm.jsp").forward(request, response);
 	}
 	
 	// 회원 탈퇴 액션
@@ -59,7 +59,9 @@ public class RemoveMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/member/logout");
 		} else {
 			System.out.println("탈퇴 실패");
-			response.sendRedirect(request.getContextPath() + "/member/deleteMember");
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			request.getRequestDispatcher("/WEB-INF/view/member/deleteMemberForm.jsp").forward(request, response);
+			// response.sendRedirect(request.getContextPath() + "/member/deleteMember");
 		}
 	}
 

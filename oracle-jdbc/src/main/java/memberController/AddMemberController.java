@@ -60,7 +60,9 @@ public class AddMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/member/login");
 		} else {
 			System.out.println("회원가입 실패");
-			response.sendRedirect(request.getContextPath()+"/member/insertMember");
+			request.setAttribute("msg", "중복된 아이디입니다.");
+			request.getRequestDispatcher("/WEB-INF/view/member/insertMemberForm.jsp").forward(request, response);
+			// response.sendRedirect(request.getContextPath()+"/member/insertMember");
 		}
 	}
 

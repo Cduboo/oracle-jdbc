@@ -22,9 +22,10 @@
 							<div class="col-lg-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">Oracle Database 실습 <code>Model2</code></h4>
+										<h4 class="card-title">Oracle Database 실습 <code>Model2 방식</code></h4>
 										<p class="card-description">
 											오라클 데이터베이스를 사용한 간단한 게시판(회원) CRUD 실습
+											+ javascript(JQuery)를 이용한 유효성 검사 실습
 										</p>
 									</div>
 								</div>

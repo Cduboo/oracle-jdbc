@@ -29,6 +29,7 @@
 							</a>
 						</c:if>
 						<c:if test="${!(empty loginMember)}">
+							<div class="text-center">${loginMember.memberName}님 안녕하세요.</div>
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberOne">
 								<i class="icon-head menu-icon"></i>MYPAGE
 							</a>

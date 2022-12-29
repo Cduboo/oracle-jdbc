@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
@@ -25,12 +27,12 @@
 										<h4 class="card-title">WRITE BOARD</h4>
 										<!-- 게시글 등록-->
 										<div class="table-responsive pt-3">
-											<form action="${pageContext.request.contextPath}/board/insertBoard" method="post">
+											<form id="submitForm" action="${pageContext.request.contextPath}/board/insertBoard" method="post">
 												<table class="table table-bordered">
 													<thead>
 														<tr>
 															<th class="table-active">title</th>
-															<td class="p-2" colspan="5"><input class="form-control" type="text" name="boardTitle"/></td>
+															<td class="p-2" colspan="5"><input class="form-control" id="boardTitle" type="text" name="boardTitle"/></td>
 														</tr>
 													</thead>
 													<tbody>
@@ -39,13 +41,13 @@
 														</tr>
 														<tr>
 															<td class="p-2" colspan="6">
-																<textarea class="form-control" rows="5" cols="20" name="boardContent"></textarea>
+																<textarea class="form-control" id="boardContent" rows="5" cols="20" name="boardContent"></textarea>
 															</td>
 														</tr>
 													</tbody>
 												</table>
 												<div class="d-flex justify-content-end mt-3">
-													<button class="btn btn-sm btn-primary" type="submit">write</button>
+													<button class="btn btn-sm btn-primary" type="button" id="submitBtn">write</button>
 												</div>
 											</form>
 										</div>

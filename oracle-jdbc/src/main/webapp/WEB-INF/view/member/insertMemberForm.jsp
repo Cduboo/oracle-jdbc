@@ -8,6 +8,8 @@
 		<title>insertMemberForm</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
 		<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" />
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
 	<body>
 		<div class="container-scroller">
@@ -21,18 +23,19 @@
 								</div>
 								<h4>New here?</h4>
 								<h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-								<form class="pt-3" action="${pageContext.request.contextPath}/member/insertMember" method="post">
+								<form class="pt-3" id="submitForm" action="${pageContext.request.contextPath}/member/insertMember" method="post">
 									<div class="form-group">
-										<input type="text" class="form-control form-control-lg" name="memberName" placeholder="Username">
+										<input type="text" class="form-control form-control-lg" name="memberName" id="memberName" placeholder="Username">
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control form-control-lg" name="memberId" placeholder="Userid">
+										<input type="text" class="form-control form-control-lg" name="memberId" id="memberId" placeholder="Userid">
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control form-control-lg" name="memberPw" placeholder="Password">
+										<input type="password" class="form-control form-control-lg" name="memberPw" id="memberPw" placeholder="Password">
 									</div>
+									<span class="text-danger" id="msg">${msg}</span>
 									<div class="mt-3">
-										<button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+										<button type="button" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="submitBtn">SIGN UP</button>
 									</div>
 									<div class="text-center mt-4 font-weight-light">
 										Already have an account? <a href="${pageContext.request.contextPath}/member/login" class="text-primary">Login</a>

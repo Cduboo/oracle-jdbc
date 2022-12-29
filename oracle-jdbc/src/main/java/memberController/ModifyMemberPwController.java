@@ -47,6 +47,7 @@ public class ModifyMemberPwController extends HttpServlet {
 		// 새 비밀번호 일치 검사
 		if(!newMemberPw.equals(newMemberPwCk)) {
 			System.out.println("새 비밀번호 불일치");
+			request.setAttribute("msg", "새 비밀번호가 일치하지 않습니다.");
 			request.getRequestDispatcher("/WEB-INF/view/member/updateMemberPwForm.jsp").forward(request, response);
 			return;
 		}
@@ -61,6 +62,7 @@ public class ModifyMemberPwController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/member/login");
 		} else {
 			System.out.println("비밀번호 변경 실패 : 비밀번호 불일치");
+			request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			request.getRequestDispatcher("/WEB-INF/view/member/updateMemberPwForm.jsp").forward(request, response);
 		}
 		

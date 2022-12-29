@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
@@ -23,7 +25,7 @@
 									<div class="card">
 										<div class="card-body">
 											<h4 class="card-title">CHANGE PASSWORD</h4>
-											<form action="${pageContext.request.contextPath}/member/updateMemberPw" method="post">
+											<form id="submitForm" action="${pageContext.request.contextPath}/member/updateMemberPw" method="post">
 												<div class="form-group row">
 													<label for="password" class="col-sm-3 col-form-label">Password</label>
 													<div class="col-sm-9">
@@ -42,8 +44,9 @@
 														<input type="password" class="form-control" name="newMemberPwCk" id="newMemberPwCk" placeholder="New Password Check">
 													</div>
 												</div>
+												<span class="text-danger" id="msg">${msg}</span>
 												<div class="d-flex justify-content-end mt-3">
-													<button type="submit" class="btn btn-primary mr-2">change</button>
+													<button type="button" class="btn btn-primary mr-2" id="submitBtn">change</button>
 												</div>
 											</form>
 										</div>
