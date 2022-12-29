@@ -18,7 +18,7 @@ public class BoardService {
 		
 		try {
 			conn = DBUtil.getConnection();
-			int beginRow = (currentPage - 1) * rowPerPage;
+			int beginRow = (currentPage - 1) * rowPerPage + 1;
 			int endRow = beginRow + rowPerPage - 1;
 	
 			boardDao = new BoardDao();

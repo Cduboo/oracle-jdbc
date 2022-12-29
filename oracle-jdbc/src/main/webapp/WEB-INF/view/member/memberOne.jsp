@@ -4,16 +4,53 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>memberOne</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/feather/feather.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
 	</head>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
-		<h1>마이페이지</h1>
-		아이디 : ${loginMember.memberId}
-		이름 : ${loginMember.memberName}
-		
-		<a href="${pageContext.request.contextPath}/member/updateMember">내정보 수정</a>
-		<a href="${pageContext.request.contextPath}/member/updateMemberPw">비밀번호 변경</a>
-		<a href="${pageContext.request.contextPath}/member/deleteMember">회원탈퇴</a>
+		<div class="container">
+			<div class="container-fluid page-body-wrapper">
+				<jsp:include page="/WEB-INF/view/inc/sidebar.jsp"></jsp:include>
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="row">
+							<div class="col-lg-12 grid-margin stretch-card">
+								<div class="container">
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">MYPAGE</h4>
+											<div class="table-responsive pt-3">
+												<table class="table table-bordered">
+													<thead>
+														<tr>
+															<th class="table-active">ID</th>
+															<td>${loginMember.memberId}</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<th class="table-active">NAME</th>
+															<td colspan="5">${loginMember.memberName}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="${pageContext.request.contextPath}/vendors/js/vendor.bundle.base.js"></script>
+		<script src="${pageContext.request.contextPath}/js/template.js"></script>
+		<script src="${pageContext.request.contextPath}/js/settings.js"></script>
 	</body>
 </html>

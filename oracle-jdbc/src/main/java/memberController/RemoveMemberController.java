@@ -42,14 +42,7 @@ public class RemoveMemberController extends HttpServlet {
 		
 		// 파라미터 수집
 		String memberPw = request.getParameter("memberPw");
-		String memberCkPw = request.getParameter("memberCkPw");
 		String memberId = loginMember.getMemberId();
-		// 비밀번호 일치 검사
-		if(!(memberPw.equals(memberCkPw))) {
-			System.out.println("비밀번호 불일치");
-			response.sendRedirect(request.getContextPath() + "/member/deleteMember");
-			return;
-		}
 		
 		// vo
 		Member member = new Member();
