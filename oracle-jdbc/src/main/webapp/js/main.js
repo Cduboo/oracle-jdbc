@@ -1,8 +1,11 @@
 $(function(){
 	const borderDanger = 'border-danger';
 	
-	document.querySelector('#submitForm input:first-of-type').focus();
-	
+	for(let i = document.querySelectorAll('#submitForm .form-control').length-1; i >= 0 ; i--) {
+		if(document.querySelectorAll('#submitForm .form-control')[i].getAttribute('readonly') == null) {
+			document.querySelectorAll('#submitForm .form-control')[i].focus();		
+		}				
+	}
 	
 	// 로그인 유효성 검사
 	$('#submitBtn').click(function() {
