@@ -1,6 +1,12 @@
 $(function(){
 	const borderDanger = 'border-danger';
 	
+	// 페이지 출력물 설정 버튼
+	$('#rowPerPage').change(function() {
+		$('#pageForm').submit();
+	})
+	
+	// 페이지 로딩 시 포커스
 	for(let i = document.querySelectorAll('#submitForm .form-control').length-1; i >= 0 ; i--) {
 		if(document.querySelectorAll('#submitForm .form-control')[i].getAttribute('readonly') == null) {
 			document.querySelectorAll('#submitForm .form-control')[i].focus();		

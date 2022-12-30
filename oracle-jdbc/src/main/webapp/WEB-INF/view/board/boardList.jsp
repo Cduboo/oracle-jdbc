@@ -11,8 +11,9 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/ti-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/css/vendor.bundle.base.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vertical-layout-light/style.css">
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	</head>
-	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<body>
 		<jsp:include page="/WEB-INF/view/inc/nav.jsp"></jsp:include>
 		<div class="container">
@@ -99,22 +100,33 @@
 											<c:set var="lastPage" value="${boardCount / rowPerPage}"></c:set>
 											<fmt:formatNumber var="ceilLastPage" value="${lastPage + (1-(lastPage%1))%1 }"></fmt:formatNumber> <!-- 올림 --> 
 											
-											<!-- <<버튼 -->
+											<!-- << 버튼 -->
+											<a class="p-3" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=1&search=${search}">&lt;&lt;</a>
+											
+											<!-- <버튼 -->
 											<c:if test="${currentPage-showNum > 0}"> 
-												<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${startNum-1}&search=${search}">이전</a>
+												<a class="p-3" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${startNum-1}&search=${search}">&lt;</a>
 											</c:if>
 											
 											<!-- 페이지 번호 -->
 											<c:forEach var="p" begin="${startNum}" end="${endNum-1}" step="1">
 												<c:if test="${p <= ceilLastPage}">
-													<a class="p-3" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${p}&search=${search}">${p}</a>
+													<c:if test="${p == currentPage}">
+														<a class="p-3 text-info" id="pageNum" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${p}&search=${search}">${p}</a>
+													</c:if>
+													<c:if test="${p != currentPage}">
+														<a class="p-3 text-secondary" id="pageNum" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${p}&search=${search}">${p}</a>
+													</c:if>
 												</c:if>
 											</c:forEach>
 											
-											<!-- >>버튼 -->
+											<!-- >버튼 -->
 											<c:if test="${startNum + showNum < lastPage}">
-												<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${startNum + showNum}&search=${search}">다음</a>
+												<a class="p-3" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${startNum + showNum}&search=${search}">&gt;</a>
 											</c:if>
+											
+											<!-- >> 버튼 -->
+											<a class="p-3" href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${ceilLastPage}&search=${search}">&gt;&gt;</a>
 										</div>
 										<div class="d-flex justify-content-end">page : ${currentPage} / ${ceilLastPage}</div>
 									</div>
@@ -125,13 +137,6 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			$(document).ready(function() {
-				$('#rowPerPage').change(function() {
-					$('#pageForm').submit();
-				})				
-			});
-		</script>
 		<script src="${pageContext.request.contextPath}/vendors/js/vendor.bundle.base.js"></script>
 		<script src="${pageContext.request.contextPath}/js/template.js"></script>
 		<script src="${pageContext.request.contextPath}/js/settings.js"></script>
