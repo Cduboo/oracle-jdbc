@@ -1,6 +1,8 @@
 package memberController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,11 +60,18 @@ public class AddMemberController extends HttpServlet {
 		if(row == 1) {
 			System.out.println("회원가입 성공");
 			response.sendRedirect(request.getContextPath()+"/member/login");
+		} else if(row == -1) {
+			System.out.println("중복된 아이디");
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('중복 아이디'); history.back(); </script>");
+			out.flush();
 		} else {
 			System.out.println("회원가입 실패");
-			request.setAttribute("msg", "중복된 아이디입니다.");
-			request.getRequestDispatcher("/WEB-INF/view/member/insertMemberForm.jsp").forward(request, response);
-			// response.sendRedirect(request.getContextPath()+"/member/insertMember");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('회원가입 실패'); history.back(); </script>");
+			out.flush();
 		}
 	}
 

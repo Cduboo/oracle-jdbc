@@ -17,6 +17,21 @@ public class MemberDao {
 		
 		return row;
 	}
+
+	// 중복 아이디 검사, 사용가능 true
+	public boolean memberIdCk(Connection conn, String memberId) throws Exception {
+		String sql = "SELECT member_id FROM member WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberId);
+		ResultSet rs = stmt.executeQuery();
+		
+		boolean memberIdCk = true;
+		if(rs.next()) {
+			memberIdCk = false;
+		}
+		
+		return memberIdCk;
+	}
 	
 	// 로그인
 	public Member login(Connection conn, Member paramMember) throws Exception {

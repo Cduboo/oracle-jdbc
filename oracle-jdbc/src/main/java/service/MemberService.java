@@ -18,7 +18,12 @@ public class MemberService {
 		try {
 			conn = DBUtil.getConnection();
 			memberDao = new MemberDao();
-			row = memberDao.insertMember(conn, member);
+			
+			if(memberDao.memberIdCk(conn, member.getMemberId())) { // 중복이 아닐 시 회원가입
+				row = memberDao.insertMember(conn, member);				
+			} else { // 중복 아이디 -1
+				return -1;
+			}
 			
 			conn.commit();
 		} catch (Exception e) {
