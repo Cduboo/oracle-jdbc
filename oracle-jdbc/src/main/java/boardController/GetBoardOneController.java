@@ -28,6 +28,10 @@ public class GetBoardOneController extends HttpServlet {
 		}
 		
 		// 파라미터 수집
+		if(request.getParameter("boardNo") == null || ("").equals(request.getParameter("boardNo"))) {
+			response.sendRedirect(request.getContextPath() + "/board/boardList");
+			return;
+		}
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		// service
